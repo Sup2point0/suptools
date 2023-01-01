@@ -12,7 +12,6 @@ def bubble(iterable, size: int) -> list:
   '''
   
   result = []
-  
   i = 0
   while len(iterable) - size >= i:
     result.append(iterable[i:i+size])
