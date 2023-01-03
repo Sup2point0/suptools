@@ -7,13 +7,13 @@ def ground(content: str) -> str:
   ```py
   >>> s = """
           sup
-          suppety
+        suppety
           sup
   """
   >>> print(ground(s))
-  sup
+    sup
   suppety
-  sup
+    sup
   ```
   '''
   
