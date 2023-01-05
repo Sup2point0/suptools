@@ -1,4 +1,4 @@
-# functions related to time
+# functions involving time
 
 
 def display(s: int):
