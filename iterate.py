@@ -18,3 +18,24 @@ def bubble(iterable, size: int) -> list:
     i += 1
   
   return result
+
+
+def indices(source, content) -> list[int]:
+  '''Find indices of all occurences of `content` in an iterable.
+  
+  ```py
+  >>> l = ['sup', 'nova', 'sup', 'shard', 'nova', 'sup']
+  >>> indices(l, 'sup')
+  [0, 2, 5]
+  >>> indices(l, 'nova')
+  [1, 4]
+  ```
+  '''
+  
+  result = []
+  
+  for i, each in enumerate(source):
+    if each == content:
+      result.append(i)
+  
+  return result
