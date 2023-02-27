@@ -6,6 +6,21 @@ import json
 from textwrap import dedent
 
 
+def assort(content, sep: str = ". ", *, line: str = "\n") -> str:
+  '''Arrange items of an iterable in a numbered list.
+  
+  ```py
+  >>> l = [sup, nova, shard]
+  >>> print(assort(l))
+  1. sup
+  2. nova
+  3. shard
+  ```
+  '''
+  
+  return line.join(f"{i + 1}{sep}{item}" for i, item in enumerate(content))
+
+
 def ground(content: str) -> str:
   '''Remove common indentation from text, and strip leading and trailing whitespace.
   
