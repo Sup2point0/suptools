@@ -2,7 +2,7 @@
 
 
 def bubble(iterable, size: int) -> list:
-  '''Iterate through an iterable in a 'bubble' of `size`.
+  '''Iterate through an iterable in a moving 'bubble' of `size`.
   
   ```py
   >>> l = [1, 2, 3, 4, 5, 6, 7]
