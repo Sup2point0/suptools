@@ -1,5 +1,9 @@
+# base classes
+
+
 class object:
-  '''Generic object with any number of attributes.'''
+  '''Generic object with any number of attributes.
+  '''
   
   def __init__(self, **attributes):
     for attribute in attributes:
@@ -7,7 +11,8 @@ class object:
 
 
 class series(list):
-  '''1-indexed list.'''
+  '''1-indexed list.
+  '''
   
   def __init__(self, /, *args):
     super().__init__([*args])
