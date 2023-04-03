@@ -1,6 +1,21 @@
 # functions involving recursion
 
 
+def locate(source, content):
+  '''Check if a multi-level iterable contains an item.
+  '''
+  
+  def recurse(source, target):
+    for each in source:
+      if each == target:
+        return True
+      elif hasattr(each, '__iter__') and not isinstance(each, str):
+        return recurse(each, target)
+    return False
+  
+  return recurse(source, content)
+
+
 def flatten(iterable) -> list:
   '''Flatten an iterable containing other iterables (except strings) into a list of single values.
 
