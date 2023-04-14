@@ -33,27 +33,27 @@ def stylize(content: str, *, quotes = True, dashes = True) -> str:
         "\"": "”",
         " ’": " ‘",
         " ”": " “",
-      }
+      })
     else:
       content = style(content, {
         "‘": "'",
         "’": "'",
         "“": "\"",
         "”": "\"",
-      }
+      })
   
   if dashes != None:
     if dashes:
       content = style(content, {
         " - ": " – ",
         " -- ": " – ",
-      }
+      })
     else:
       content = style(content, {
         "–": "-",
         " — ": " - ",
         "—": "-",
-      }
+      })
   
   return content
 
