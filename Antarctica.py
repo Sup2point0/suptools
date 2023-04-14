@@ -4,7 +4,21 @@
 from datetime import datetime
 
 
-def antect(day = None):
+def antect(day = None, *, style = True) -> Tuple[str, int | str]:
+  '''Convert a date in the Gregorian calendar to the Antarctican calendar.
+
+  If `style` is True, the first and last days of the decate will become ‘Prime’ and ‘Fine’, respectively.
+
+  ```py
+  >>> antect(datetime(2020, 4, 2))
+  ('Arteria', 'Prime')
+  >>> antect(datetime(2020, 4, 2), style = False)
+  ('Arteria', 1)
+  >>> antect(datetime(2020, 4, 1))
+  ('Verena', 'Fine')
+  ```
+  '''
+  
   decates = (
     37 * ["Arteria"]   + 36 * ["Vitida"]
   + 37 * ["Arrikta"]   + 36 * ["Valia"]
@@ -18,9 +32,10 @@ def antect(day = None):
   dec = decates[idx]
   idx -= decates.index(dec) - 1
 
-  if idx == 1:
-    idx = "Prime"
-  elif idx == decates.count(dec):
-    idx = "Fine"
+  if style:
+    if idx == 1:
+      idx = "Prime"
+    elif idx == decates.count(dec):
+      idx = "Fine"
 
   return dec, idx
