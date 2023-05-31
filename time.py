@@ -2,7 +2,16 @@
 
 
 def display(s: int):
-  '''Display seconds as written time.
+  '''Display `s` seconds as written time.
+  
+  ```py
+  >>> display(60)
+  '1 min'
+  >>> display(69420)
+  '19h 17 min'
+  >>> print(display(31415926), "ago")
+  363d 14h ago
+  ```
   '''
   
   if s / 86400 >= 1:
