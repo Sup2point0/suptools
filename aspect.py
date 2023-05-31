@@ -62,7 +62,7 @@ def assort(content, sep: str = ". ", *, line: str = "\n") -> str:
   '''Arrange items of an iterable in a numbered list.
   
   ```py
-  >>> l = [sup, nova, shard]
+  >>> l = ["sup", "nova", "shard"]
   >>> print(assort(l))
   1. sup
   2. nova
@@ -71,6 +71,25 @@ def assort(content, sep: str = ". ", *, line: str = "\n") -> str:
   '''
   
   return line.join(f"{i + 1}{sep}{item}" for i, item in enumerate(content))
+
+
+def listed(content, sep: str = ", ", end: str = " and ") -> str:
+  '''List items of an iterable in natural language.
+  
+  `sep` is what each item should be separated by, and `end` is the separator between the last 2 items.
+  
+  ```py
+  >>> l = ["sup", "nova", "shard"]
+  >>> listed(l)
+  'sup, nova and shard'
+  >>> listed(l, "; ", "; ")
+  'sup; nova; shard'
+  ```
+  '''
+  
+  return "".join(str(each) + (
+    "" if (i == len(content) - 1) else end if (i == len(content) - 2) else sep
+  ) for i, each in enumerate(content))
 
 
 def ground(content: str) -> str:
