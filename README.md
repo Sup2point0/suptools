@@ -1,6 +1,9 @@
 # <h1 align="center"> `Suptools` </h1>
 
-Utility functions that are actually useful!
+Utility functions and classes that are actually useful!
+
+
+<br>
 
 
 ## Index
