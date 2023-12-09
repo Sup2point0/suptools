@@ -1,4 +1,4 @@
-# <h1 align="center"> `Suptools` </h1>
+<h1 align="center"> `Suptools` </h1>
 
 Utility functions and classes that are actually useful!
 
