@@ -1,4 +1,6 @@
-# functions involving recursion
+'''
+Functions involving recursion.
+'''
 
 
 def locate(source, content):
@@ -61,3 +63,7 @@ def attain(source, *, depth = True) -> list:
       yield getattr(source, item) if depth else item
     else:
       yield from attain(getattr(source, item), depth = depth)
+
+
+def collapse_dict(source: dict, levels: int = None) -> dict:
+ '''Collapse a `dict` or similar mapping such that'''
