@@ -1,0 +1,13 @@
+[project]
+name = "suptools"
+description = ""
+readme = "README.md"
+authors = [{name = "Sup#2.0"}]
+license = {file = "LICENSE"}
+requires-python = ">= 3.10"
+dependencies = []
+keywords = []
+
+[project.urls]
+Homepage = "https://github.com/Sup2point0/suptools"
+Repository = "https://github.com/Sup2point0/suptools"
