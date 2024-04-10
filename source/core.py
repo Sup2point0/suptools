@@ -1,30 +1,25 @@
-# base classes
+'''
+Implements fundamental utility functions and classes.
+'''
 
 
-class object:
-  '''Generic object with any number of attributes.
-
-  ```py
-  >>> test = object(x = 6, y = 9)
-  >>> print(test)
-  object(x = 6, y = 9)
-  ```
-  '''
+class Object:
+  '''Generic object with any attributes.'''
   
   def __init__(self, **attributes):
+    '''Create a generic object with any given attributes.'''
+    
     for attribute in attributes:
       self.__setattr__(attribute, attributes[attribute])
 
   def __str__(self):
-    '''Return a clean string representation of the object’s properties.
-    '''
+    '''Return a clean string representation of the object’s properties.'''
     
     return "object(" + ", ".join(f"{each} = {vars(self)[each]}" for each in vars(self)) + ")"
 
 
-class series(list):
-  '''1-indexed list. Supports all of the functionality of a regular list.
-  '''
+class Series(list):
+  '''1-indexed list. Supports all of the functionality of a regular list.'''
   
   def __init__(self, /, *args):
     super().__init__([*args])
