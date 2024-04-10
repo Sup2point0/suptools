@@ -1,4 +1,8 @@
-from .source import *
+'''
+suptools
+v2.0.0
 
-from . import source as _source
-__doc__ = _source.__doc__
+Uility functions and classes.
+'''
+
+from .source import *
