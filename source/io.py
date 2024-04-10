@@ -1,5 +1,6 @@
 import json
 
+
 def overwrite(file, content: str):
   '''Overwrite contents of `file` with `content`.'''
 
