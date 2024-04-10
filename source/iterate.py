@@ -1,23 +1,40 @@
-# functions involving iteration
+'''
+Functions involving iteration and iterables.
+'''
+
+from typing import Iterable
+from collections.abc import Generator
 
 
-def bubble(iterable, size: int) -> list:
-  '''Iterate through an iterable in a moving 'bubble' of `size`.
+def bubble(seq: Iterable, /, size: int = 2) -> Generator:
+  '''Return an iterator for traversing an iterable in a moving ‘bubble’ of `size`.
   
   ```py
-  >>> l = [1, 2, 3, 4, 5, 6, 7]
-  >>> bubble(l, 3)
-  [[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6], [5, 6, 7]]
+  >>> l = list(range(7))
+  >>> for each in bubble(l, 3):
+        print(each)
+  (1, 2, 3)
+  (2, 3, 4)
+  (3, 4, 5)
+  (4, 5, 6)
   ```
   '''
-  
-  result = []
-  i = 0
-  while len(iterable) - size >= i:
-    result.append(iterable[i:i+size])
-    i += 1
-  
-  return result
+
+  if not isinstance(seq, Iterable):
+    raise TypeError(f"sequence must be an iterable, not {type(seq)}")
+  if not isinstance(size, int):
+    raise TypeError(f"size must be an int, not {type(seq)}")
+  if size < 1:
+    raise ValueError("size must be positive")
+
+  idx = 0
+  apex = len(seq) - size
+
+  while idx < apex:
+    yield tuple(seq[i] for i in range(idx, idx + size))
+    idx += 1
+
+  raise GeneratorExit()
 
 
 def has(iterable, *values, every = False) -> bool:
