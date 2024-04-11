@@ -37,28 +37,35 @@ def bubble(seq: Iterable, /, size: int = 2) -> Generator:
   raise GeneratorExit()
 
 
-def has(iterable, *values, every = False) -> bool:
-  '''Check if `iterable` contains any of `values`.
+def has(seq: Iterable, values: Iterable, /, *, every: bool = False) -> bool:
+  '''Check if an iterable contains any of `values`.
   
-  If `every` is `True`, it must contain every specified value.
+  If `every` is enabled, check if it contains all of them.
 
   ```py
   >>> l = ['sup', 'nova', 'shard']
-  >>> has(l, 'soup')
+  >>> has(l, ['soup'])
   False
-  >>> has(l, 'sup')
+  >>> has(l, ['sup'])
   True
-  >>> has(l, 'sup', 'shard')
+  >>> has(l, ['sup', 'shard'])
   True
-  >>> has(l, 'sup', 'soup')
+  >>> has(l, ['sup', 'soup'])
   True
-  >>> has(l, 'sup', 'soup', every = True)
+  >>> has(l, ['sup', 'soup'], every = True)
   False
   ```
   '''
 
-  out = (each in iterable for each in values)
-  return all(out) if every else any(out)
+  if not isinstance(values, Iterable):
+    raise TypeError(f"values must be an iterable, not {type(values)}")
+  if isinstance(values, str):
+    raise TypeError("values cannot be a single string")
+
+  if every is True:
+    return all(value in seq for value in values)
+  else:
+    return any(each in values for for each in seq)
 
 
 def index_any(iterable, *values, check = False) -> int | tuple[int, any] | None:
