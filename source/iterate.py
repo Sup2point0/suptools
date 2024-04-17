@@ -65,7 +65,7 @@ def has(seq: Iterable, values: Iterable, /, *, every: bool = False) -> bool:
   if every is True:
     return all(value in seq for value in values)
   else:
-    return any(each in values for for each in seq)
+    return any(each in values for each in seq)
 
 
 def index_any(iterable, *values, check = False) -> int | tuple[int, any] | None:
