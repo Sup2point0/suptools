@@ -45,7 +45,7 @@ def vitals(
       wrapper.vitals.start = time.time()
 
       try:
-        func(*args, **kwargs)
+        return func(*args, **kwargs)
       except guards:
         if catch is None:
           raise
