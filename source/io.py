@@ -1,12 +1,10 @@
 import json
 
 
-def overwrite(file, content: str):
-  '''Overwrite contents of `file` with `content`.'''
+def save_json(file, data: dict):
+  '''Save data to a JSON file.'''
 
-  file.seek(0)
-  file.write(content)
-  file.truncate()
+  file.write(json.dumps(data, indent = 2))
 
 
 def restructure_json(file, indent = 2):
@@ -14,4 +12,4 @@ def restructure_json(file, indent = 2):
 
   data = json.load(file)
   content = json.dumps(data, indent = indent)
-  overwrite(file, content)
+  file.write(content)
