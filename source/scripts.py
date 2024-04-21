@@ -4,8 +4,8 @@ Implements the `Script` class for running scripts with status messages.
 
 from typing import Callable
 
+from . import vitality
 from .logging import log
-from .vitality import vitals
 
 
 def run(script: Callable, vitals = True):
@@ -15,8 +15,9 @@ def run(script: Callable, vitals = True):
 
   if vitals:
     if not hasattr(script, "vitals"):
-      script = vitals(view = True)(script)
+      script = vitality.vitals(view = True)(script)
   
-  return script()
+  out = script()
   
   log(status = "Done!")
+  return out
