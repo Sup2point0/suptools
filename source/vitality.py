@@ -42,29 +42,33 @@ def vitals(
   def decorator(func):
     def wrapper(*args, **kwargs):
       guards = tuple(catch) if isinstance(catch, Iterable) else catch or Exception
-      wrapper.vitals.start = time.time()
+
+      vita = wrapper.vitals
+      vita.start = time.time()
 
       try:
-        return func(*args, **kwargs)
+        out = func(*args, **kwargs)
       except guards:
         if catch is None:
           raise
         else:
-          wrapper.vitals.exceptions += 1
+          vita.exceptions += 1
 
-      wrapper.vitals.end = time.time()
-      wrapper.vitals.delta = wrapper.vitals.end - wrapper.vitals.start
-      wrapper.vitals.elapse += wrapper.vitals.elapse
+      vita.end = time.time()
+      vita.delta = vita.end - vita.start
+      vita.elapse += vita.elapse
 
-      if wrapper.vitals.delta < wrapper.vitals.quickest:
-        wrapper.vitals.quickest = wrapper.vitals.delta
-      elif wrapper.vitals.delta > wrapper.vitals.quickest:
-        wrapper.vitals.slowest = wrapper.vitals.delta
+      if vita.delta < vita.quickest:
+        vita.quickest = vita.delta
+      elif vita.delta > vita.quickest:
+        vita.slowest = vita.delta
 
-      wrapper.vitals.runs += 1
+      vita.runs += 1
 
       if view:
-        print(wrapper.vitals.view())
+        print(vita.view())
+
+      return out
 
     wrapper.vitals = Vitals()
 
