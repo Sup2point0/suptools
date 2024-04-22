@@ -22,3 +22,9 @@ def log(
   else:
     for key, val in kwargs.items():
       print(f"|> {key} = {val}")
+
+
+def _input_(text: str) -> str:
+  '''Prompt the user for input.'''
+
+  return input("=> text = ")
