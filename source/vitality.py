@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from textwrap import dedent
 from typing import Iterable
 
+from .logging import log
+
 
 @ dataclass
 class Vitals:
@@ -33,6 +35,7 @@ class Vitals:
 def vitals(
   catch: Exception | list[Exception] = None,
   view: bool = False,
+  track_calls = False,
 ):
   '''Track performance of a function.
   
@@ -45,6 +48,9 @@ def vitals(
 
       vita = wrapper.vitals
       vita.start = time.time()
+
+      if track_calls:
+        log(act = f"calling {repr(func)}")
 
       try:
         out = func(*args, **kwargs)
