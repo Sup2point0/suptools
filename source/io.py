@@ -1,6 +1,6 @@
 import itertools as it
 import json
-from base64 import standard_b64decode
+from base64 import b64decode
 from io import StringIO
 from typing import Callable
 
@@ -19,48 +19,52 @@ def restructure_json(file, indent = 2) -> None:
   file.write(content)
 
 
-def isplitlines_base64(
+def decode_base64_lines(
   content: str,
   chunksize = 20,
   lines: int = None,
   predicate: Callable = None
 ) -> str:
-  '''Decode a base64 string in chunks and split it into lines. The generator stops when either `lines` have been returned or `predicate()` returns a truthy value.
+  '''Decode a base64 string in chunks and split it into lines.
+  
+  When either `lines` have been returned or `predicate()` returns a truthy value, the generator returns its last value and stops.
   
   This is significantly safer than `.split()` or other bulk-processing methods, since it avoids parsing all of the content at once, only when needed.
   '''
 
   batches = it.batched(content, chunksize)
-
-  out = StringIO()
   decoded = StringIO()
-
-  i = -1
+  
   count = 0
+  done = False
 
   while "there is content left unprocessed":
-    i += 1
+    count += 1
 
-    try:
-      char = decoded[i]
-    except IndexError:
+    while "no newline reached":
       try:
         batch = next(batches)
       except StopIteration:
-        break
+        return
       
-      chunk = standard_b64decode(batch)
-      decoded.write(chunk)
-      char = decoded[i]
-    
-    out.write(char)
+      chunk = b64decode(batch).decode("utf-8")
+      last, _, overflow = chunk.partition("\n")
 
-    count += 1
-    if lines is not None and count > lines:
-      break
-    elif (predicate or (lambda: False))():
-      break
+      decoded.write(last)
+      if overflow:
+        break
+
+    if lines is not None:
+      if count > lines:
+        done = True
+    if predicate:
+      if predicate():
+        done = True
+    
+    line = out.getvalue()
+    decoded = StringIO(overflow)
+
+    if done:
+      return line
     else:
-      line = out.getvalue()
-      out = StringIO()
       yield line
