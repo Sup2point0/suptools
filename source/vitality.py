@@ -54,11 +54,12 @@ def vitals(
 
       try:
         out = func(*args, **kwargs)
-      except guards:
+      except guards as e:
         if catch is None:
           raise
         else:
           vita.exceptions += 1
+          log(error = e)
 
       vita.end = time.time()
       vita.delta = vita.end - vita.start
