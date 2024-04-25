@@ -2,7 +2,7 @@ import itertools as it
 import json
 from base64 import b64decode
 from io import StringIO
-from typing import Callable
+from typing import Generator, Callable
 
 
 def save_json(file, data: dict) -> None:
@@ -24,7 +24,7 @@ def decode_base64_lines(
   chunksize = 20,
   lines: int = None,
   predicate: Callable = None
-) -> str:
+) -> Generator[str, None, None]:
   '''Decode a base64 string in chunks and split it into lines.
   
   When either `lines` have been returned or `predicate()` returns a truthy value, the generator returns its last value and stops.
@@ -61,7 +61,7 @@ def decode_base64_lines(
       if predicate():
         done = True
     
-    line = out.getvalue()
+    line = decoded.getvalue()
     decoded = StringIO(overflow)
 
     if done:
