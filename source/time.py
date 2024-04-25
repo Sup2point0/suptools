@@ -1,7 +1,10 @@
-# functions involving time
-
-
-def display(s: int):
+def display(
+  s: int,
+  parts: int = 2,
+  collapse = True,
+  verbose = False,
+  sep = " ",
+):  ### TODO
   '''Display `s` seconds as written time.
   
   ```py
@@ -9,8 +12,12 @@ def display(s: int):
   '1 min'
   >>> display(69420)
   '19h 17 min'
-  >>> print(display(31415926), "ago")
-  363d 14h ago
+  >>> display(69420, parts = 1)
+  '19h'
+  >>> display(46920, verbose = True)
+  '19 hours 17 minutes'
+  >>> display(69420, verbose = True, sep = ", ")
+  '19 hours, 17 minutes'
   ```
   '''
   
