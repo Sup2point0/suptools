@@ -21,11 +21,11 @@ def bubble(seq: Iterable, /, size: int = 2) -> Generator:
   '''
 
   if not isinstance(seq, Iterable):
-    raise TypeError(f"sequence must be an iterable, not {type(seq)}")
+    raise TypeError(f"Sequence must be an iterable, not {type(seq)}")
   if not isinstance(size, int):
-    raise TypeError(f"size must be an int, not {type(seq)}")
+    raise TypeError(f"Size must be an int, not {type(seq)}")
   if size < 1:
-    raise ValueError("size must be positive")
+    raise ValueError("Size must be positive")
 
   idx = 0
   apex = len(seq) - size
@@ -35,6 +35,37 @@ def bubble(seq: Iterable, /, size: int = 2) -> Generator:
     idx += 1
 
   raise GeneratorExit()
+
+
+def chunked(seq: Iterable, /, size: int) -> Generator:
+  '''Return an iterator for traversing an iterable in chunks of `size`.
+  
+  ```py
+  >>> l = list(range(7))
+  >>> for each in chunked(l, 3):
+        print(each)
+  (0, 1, 2)
+  (3, 4, 5)
+  (6S
+  ```
+  '''
+
+  if not isinstance(seq, Iterable):
+    raise TypeError(f"Sequence must be an iterable, not {type(seq)}")
+  if not isinstance(size, int):
+    raise TypeError(f"Size must be an int, not {type(seq)}")
+  if size < 1:
+    raise ValueError("Size must be positive")
+
+  idx = 0
+  chunk = []
+
+  for each in seq:
+    while idx < size:
+      chunk[idx] = each
+      idx += 1
+    
+    return chunk
 
 
 def has(seq: Iterable, values: Iterable, /, *, every: bool = False) -> bool:
