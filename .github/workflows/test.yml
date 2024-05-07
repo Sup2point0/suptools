@@ -32,4 +32,4 @@ jobs:
           pip install pytest
 
       - name: 'Pytest – run'
-        run: pytest
+        run: python3 -m pytest
