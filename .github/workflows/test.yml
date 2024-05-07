@@ -5,7 +5,9 @@ on:
   schedule:
     - cron: '20 4 * * 2,6'
   push:
-    paths: '*.py'
+    paths:
+      - '*.py'
+      - '*.yml'
 
 jobs:
   test:
