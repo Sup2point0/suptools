@@ -31,7 +31,7 @@ def in_dict(source: dict, target, default = None):
   ## TODO? support any dict-like object
   
   try:
-    out = _search_(source, target)
+    out = _search_(source, target, index = NotImplemented)
   except NotFound:
     return default
   else:
