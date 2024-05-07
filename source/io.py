@@ -42,10 +42,12 @@ def decode_base64_lines(
     count += 1
 
     while "no newline reached":
-      try:
-        batch = next(batches)
-      except StopIteration:
-        return
+      last, _, overflow = chunk.partition("\n")
+      if not overflow:
+        try:
+          batch = next(batches)
+        except StopIteration:
+          return
       
       chunk = b64decode(batch).decode("utf-8")
       last, _, overflow = chunk.partition("\n")
