@@ -57,15 +57,20 @@ def chunked(seq: Iterable, /, size: int) -> Generator:
   if size < 1:
     raise ValueError("Size must be positive")
 
-  idx = 0
+  i = 0
   chunk = []
 
   for each in seq:
-    while idx < size:
-      chunk[idx] = each
-      idx += 1
-    
-    return chunk
+    chunk.append(each)
+    i += 1
+
+    if i >= size:
+      i = 0
+      yield tuple(chunk)
+      chunk = []
+
+  if chunk:
+    yield tuple(chunk)
 
 
 def has(seq: Iterable, values: Iterable, /, *, every: bool = False) -> bool:
