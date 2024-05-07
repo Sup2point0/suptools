@@ -1,18 +1,19 @@
 name: Test
 
-
 on:
   workflow_dispatch:
-
   schedule:
     - cron: '20 4 * * 2,6'
-  
   push:
     paths: '*.py'
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./tests
 
     steps:
       - name: 'Git – checkout'
