@@ -38,14 +38,15 @@ def decode_base64_lines(
 
   batches = it.batched(content, chunksize)
   decoded = StringIO()
+  chunk = ""
   
   count = 0
   done = False
 
-  while "there is content left unprocessed":
+  while True:
     count += 1
 
-    while "no newline reached":
+    while True:
       last, _, overflow = chunk.partition("\n")
       if not overflow:
         try:
