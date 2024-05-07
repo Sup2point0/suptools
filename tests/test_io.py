@@ -1,8 +1,6 @@
 import base64
 
-import suptools as sup
-
-import sys; print(sys.path[0])
+import source as sup
 
 
 def test_decode_base64_lines():
