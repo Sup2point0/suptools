@@ -1,9 +1,5 @@
 import base64
 
-import sys
-raise ValueError(sys.path[0])
-
-import suptools as sup
 import source as sup
 
 
