@@ -4,7 +4,7 @@ print(f"cwd = {os.getcwd()}")
 
 import base64
 
-import source as sup
+import suptools as sup
 
 
 def test_decode_base64_lines():
