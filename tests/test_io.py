@@ -1,3 +1,7 @@
+import sys, os
+print(f"path = {sys.path}")
+print(f"cwd = {os.getcwd()}")
+
 import base64
 
 import source as sup
