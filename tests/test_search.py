@@ -1,4 +1,4 @@
-from source import search
+from suptools import search
 
 
 def test_search_dict():

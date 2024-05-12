@@ -6,8 +6,7 @@ on:
     - cron: '20 4 * * 2,6'
   push:
     paths:
-      - '*.py'
-      - '*.yml'
+      - '**.py'
 
 jobs:
   test:
@@ -22,12 +21,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-
-      # - name: 'Git – setup submodules'
-      #   run: |
-      #     # cd weighted-list
-      #     git submodule update --init --remote
-      #     # cd ..
 
       - name: 'Python – setup'
         uses: actions/setup-python@v5

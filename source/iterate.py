@@ -6,6 +6,16 @@ from typing import Iterable
 from collections.abc import Generator
 
 
+def unique(seq: Iterable) -> Generator:
+  '''Iterate over unique items of a sequence, skipping those that have been returned before.'''
+
+  seen = set()
+  for each in seq:
+    if each not in seen:
+      seen.add(each)
+      yield each
+
+
 def bubble(seq: Iterable, /, size: int = 2) -> Generator:
   '''Return an iterator for traversing an iterable in a moving ‘bubble’ of `size`.
   

@@ -1,4 +1,4 @@
-from source import iterate
+from suptools import iterate
 
 
 def test_chunked():
