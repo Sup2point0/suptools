@@ -37,13 +37,14 @@ def decode_base64_lines(
   '''
 
   batches = it.batched(content, chunksize)
-  decoded = StringIO()
+  batch = ""
   chunk = ""
+  decoded = StringIO()
   
   count = 0
   done = False
 
-  while not done:
+  while True:
     count += 1
 
     while True:
@@ -70,7 +71,7 @@ def decode_base64_lines(
     
     line = decoded.getvalue()
     chunk = overflow
-    decoded = StringIO(overflow)
+    decoded = StringIO()
 
     if done:
       yield line
