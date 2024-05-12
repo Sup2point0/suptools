@@ -53,6 +53,7 @@ def decode_base64_lines(
           batch = bytes(next(batches))
         except StopIteration:
           done = True
+          break
       
       chunk = b64decode(batch.decode("utf-8")).decode()
       chunk, _, overflow = chunk.partition("\n")
@@ -68,9 +69,11 @@ def decode_base64_lines(
         done = True
     
     line = decoded.getvalue()
+    chunk = overflow
     decoded = StringIO(overflow)
 
     if done:
-      return line
+      yield line
+      return
     else:
       yield line
