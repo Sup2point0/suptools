@@ -1,4 +1,4 @@
-import itertools as it
+import itertools
 import json
 from base64 import b64decode
 from io import StringIO
@@ -6,7 +6,7 @@ from typing import Generator, Callable
 
 ### NOTE temporary until Python 3.12 works
 from .iterate import chunked
-it.batched = chunked
+itertools.batched = chunked
 
 
 def save_json(file, data: dict) -> None:
@@ -36,42 +36,43 @@ def decode_base64_lines(
   This is significantly safer than `.split()` or other bulk-processing methods, since it avoids parsing all of the content at once, only when needed.
   '''
 
-  batches = it.batched(content, chunksize)
-  batch = ""
-  chunk = ""
-  decoded = StringIO()
+  batches = itertools.batched(content, chunksize)
+  batch: bytes
+  chunk: str
+  decoded: str
+  stream = ""#StringIO()
   
   count = 0
   done = False
 
   while True:
     count += 1
+    if lines is not None:
+      if count > lines:
+        done = True
 
     while True:
-      chunk, _, overflow = chunk.partition("\n")
+      chunk, _, overflow = stream.partition("\n")
       if not overflow:
         try:
           batch = bytes(next(batches))
         except StopIteration:
           done = True
-          break
-      
-      chunk = b64decode(batch.decode("utf-8")).decode()
-      chunk, _, overflow = chunk.partition("\n")
-      decoded.write(chunk)
-      if overflow:
+        else:
+          decoded = b64decode(batch.decode("utf-8")).decode()
+          stream += decoded
+          chunk, _, overflow = stream.partition("\n")
+
+      if overflow or done:
         break
 
-    if lines is not None:
-      if count > lines:
-        done = True
     if predicate:
       if predicate():
         done = True
     
-    line = decoded.getvalue()
-    chunk = overflow
-    decoded = StringIO()
+    line = chunk
+    stream = overflow
+    chunk = ""
 
     if done:
       yield line
