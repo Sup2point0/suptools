@@ -5,6 +5,7 @@ from . import time
 from .core import *
 from .logging import log, _input_ as input
 from .scripts import run
+from .version import Version
 from .vitality import vitals
 
 ## ALIASES ##
