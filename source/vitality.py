@@ -6,7 +6,7 @@ from typing import Iterable
 from .logging import log
 
 
-VIEWS = set()
+VIEWS = []
 
 
 @ dataclass
@@ -82,7 +82,7 @@ def vitals(
     wrapper.vitals = Vitals(shard = repr(func))
 
     if view:
-      VIEWS.add(wrapper.vitals)
+      VIEWS.append(wrapper.vitals)
     
     return wrapper
   
