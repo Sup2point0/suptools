@@ -6,8 +6,12 @@ from typing import Iterable
 from .logging import log
 
 
+VIEWS = set()
+
+
 @ dataclass
 class Vitals:
+  shard: str = ""
   start: float = None
   end: float = None
   delta: float = None
@@ -24,6 +28,7 @@ class Vitals:
   def view(self) -> str:
     return dedent(f'''
       --- suptools: vitality ---
+      | {self.shard}
       | runs = {self.runs}
       | last delta = {round(self.delta, 2)}
       | quickest = {round(self.quickest, 2)}
@@ -72,12 +77,13 @@ def vitals(
 
       vita.runs += 1
 
-      if view:
-        print(vita.view())
-
       return out
 
-    wrapper.vitals = Vitals()
+    wrapper.vitals = Vitals(shard = repr(func))
 
+    if view:
+      VIEWS.add(wrapper.vitals)
+    
     return wrapper
+  
   return decorator

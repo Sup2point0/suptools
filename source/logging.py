@@ -4,6 +4,10 @@ Stylised printing.
 
 LINES = "-" * 42
 
+BLUE = "\033[94m"
+CYAN = "\033[96m"
+RED = "\033[93m"
+
 
 def log(
   text: str = None,
@@ -17,13 +21,13 @@ def log(
   if status:
     print(f"\n{LINES} {status} {LINES}\n")
   if act:
-    print(f">> {act}")
+    print(f"{CYAN}>> {act}")
   if text:
     print(text)
   for key, val in kwargs.items():
-    print(f"|| {key} = {val}")
+    print(f"{BLUE}|| {key} = {val}")
   if error:
-    print(f"|> {error}")
+    print(f"{RED}|> {error}")
 
 
 def _input_(text: str) -> str:
