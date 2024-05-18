@@ -21,13 +21,13 @@ def log(
   if status:
     print(f"\n{LINES} {status} {LINES}\n")
   if act:
-    print(f"{CYAN}>> {act}")
+    print(f">> {CYAN}{act}")
   if text:
     print(text)
   for key, val in kwargs.items():
-    print(f"{BLUE}|| {key} = {val}")
+    print(f"|| {BLUE}{key} = {val}")
   if error:
-    print(f"{RED}|> {error}")
+    print(f"|> {RED}{error}")
 
 
 def _input_(text: str) -> str:

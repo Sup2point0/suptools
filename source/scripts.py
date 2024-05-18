@@ -20,7 +20,7 @@ def run(script: Callable, vitals = True):
   out = script()
   
   for vital in vitality.VIEWS:
-    vital.view()
+    print(vital.view())
   
   log(status = "Done!")
   return out

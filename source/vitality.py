@@ -30,10 +30,10 @@ class Vitals:
       --- suptools: vitality ---
       | {self.shard}
       | runs = {self.runs}
-      | last delta = {round(self.delta, 2)}
-      | quickest = {round(self.quickest, 2)}
-      | slowest = {round(self.slowest, 2)}
-      | average = {round(self.average, 2)}
+      | last delta = {round(self.delta, 4)}
+      | quickest = {round(self.quickest, 4)}
+      | slowest = {round(self.slowest, 4)}
+      | average = {round(self.average, 4)}
     ''')
 
 
@@ -68,11 +68,11 @@ def vitals(
 
       vita.end = time.time()
       vita.delta = vita.end - vita.start
-      vita.elapse += vita.elapse
+      vita.elapse += vita.delta
 
       if vita.delta < vita.quickest:
         vita.quickest = vita.delta
-      elif vita.delta > vita.quickest:
+      if vita.delta > vita.slowest:
         vita.slowest = vita.delta
 
       vita.runs += 1
