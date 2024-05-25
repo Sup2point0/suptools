@@ -4,9 +4,11 @@ from base64 import b64decode
 from io import StringIO
 from typing import Generator, Callable
 
-### NOTE temporary until Python 3.12 works
-from .iterate import chunked
-itertools.batched = chunked
+### BACKWARDS COMPATIBILITY
+import sys
+if sys.version_info.minor < 12:
+  from .iterate import chunked
+  itertools.batched = chunked
 
 
 def save_json(file, data: dict) -> None:
